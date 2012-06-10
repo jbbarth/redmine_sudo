@@ -5,12 +5,10 @@ class UsersController
 
   def sudo
     require_login #should render a 403 if no user found
-    render_403 unless User.current.sudoer?
-    if User.current.admin?
-      User.current.update_attribute(:admin, false)
-    else
-      User.current.update_attribute(:admin, true)
-    end
+    user = User.current
+    render_403 unless user.sudoer?
+    new_value = !user.admin?
+    User.update_all({:admin => !user.admin?}, {:id => user.id})
     redirect_to :back
   end
 end

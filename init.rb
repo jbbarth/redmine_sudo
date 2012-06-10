@@ -4,6 +4,7 @@ require 'redmine_sudo/hooks'
 
 # Patches to existing classes/modules
 config.to_prepare do
+  require_dependency 'redmine_sudo/user_patch'
   require_dependency 'redmine_sudo/users_controller_patch'
 end
 
