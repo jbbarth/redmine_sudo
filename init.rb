@@ -1,8 +1,10 @@
 require 'redmine'
 
+require 'redmine_sudo/hooks'
+
 # Patches to existing classes/modules
 config.to_prepare do
-  # nothing for now
+  require_dependency 'redmine_sudo/users_controller_patch'
 end
 
 # Plugin generic informations
