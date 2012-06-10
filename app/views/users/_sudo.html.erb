@@ -1,6 +1,6 @@
 <% if User.current.sudoer? %>
 <style>
-  .sudo { margin:0 5px; }
+  .sudo { margin:0 5px; font-weight:normal !important; }
 </style>
 <% label = User.current.admin? ? 'sudo -k' : 'sudo -v' %>
 <script>
