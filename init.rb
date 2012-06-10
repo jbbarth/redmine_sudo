@@ -7,7 +7,6 @@ reloader = Redmine::VERSION::MAJOR <= 1 ? config : ActionDispatch::Callbacks
 # Patches to existing classes/modules
 reloader.to_prepare do
   require_dependency 'redmine_sudo/user_patch'
-  require_dependency 'redmine_sudo/users_controller_patch'
 end
 
 # Plugin generic informations

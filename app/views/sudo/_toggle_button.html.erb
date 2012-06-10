@@ -5,7 +5,7 @@
 <% label = User.current.admin? ? 'sudo -k' : 'sudo -v' %>
 <script>
   document.observe("dom:loaded", function() {
-    var sudo_button = new Element('a', { 'class': 'sudo', 'href': '/users/sudo/toggle' }).update('[<%=label%>]')
+    var sudo_button = new Element('a', { 'class': 'sudo', 'href': '/sudo/toggle' }).update('[<%=label%>]')
     var sudo_span = new Element('span').update(sudo_button)
     $('loggedas').insert ({
       'bottom' : sudo_span
