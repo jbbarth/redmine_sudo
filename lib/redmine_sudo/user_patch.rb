@@ -10,4 +10,8 @@ class User
     end
     true
   end
+
+  def update_admin!(value)
+    User.update_all({:admin => value}, {:id => self.id})
+  end
 end
