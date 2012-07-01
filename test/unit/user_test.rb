@@ -1,5 +1,21 @@
 require File.expand_path('../../test_helper', __FILE__)
 
+# redmine 2.x doesn't use object_daddy anymore
+unless User.respond_to?(:generate)
+  def User.generate(attributes = {})
+    @generated_user_login ||= 'user0'
+    @generated_user_login.succ!
+    user = User.new(attributes)
+    user.login = @generated_user_login if user.login.blank?
+    user.mail = "#{@generated_user_login}@example.com" if user.mail.blank?
+    user.firstname = "Bob" if user.firstname.blank?
+    user.lastname = "Doe" if user.lastname.blank?
+    yield user if block_given?
+    user.save!
+    user
+  end
+end
+
 class UserTest < ActiveSupport::TestCase
   test 'user gets correct sudoer at creation' do
     user = User.generate(:admin => true)
