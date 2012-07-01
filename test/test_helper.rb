@@ -1,10 +1,11 @@
-require 'redmine'
+rails2_helper = File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
+rails3_helper = File.expand_path(File.dirname(__FILE__) + '/../../../test/test_helper')
 
-if Redmine::VERSION::MAJOR <= 1
+if File.exists?(rails2_helper)
   # Rails 2.3
-  require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper')
+  require rails2_helper
   Engines::Testing.set_fixture_path
 else
   # Rails 3
-  require File.expand_path(File.dirname(__FILE__) + '/../../../test/test_helper')
+  require rails3_helper
 end
