@@ -11,6 +11,7 @@ unless User.respond_to?(:generate)
     user.firstname = "Bob" if user.firstname.blank?
     user.lastname = "Doe" if user.lastname.blank?
     yield user if block_given?
+    user.admin = true if attributes[:admin]
     user.save!
     user
   end
