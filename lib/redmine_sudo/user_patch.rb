@@ -14,5 +14,6 @@ class User
 
   def update_admin!(value)
     User.update_all({:admin => value}, {:id => self.id})
+    User.update_all({:updated_on => Time.now}, {:id => self.id})
   end
 end

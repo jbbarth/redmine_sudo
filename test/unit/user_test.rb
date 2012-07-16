@@ -42,4 +42,12 @@ class UserTest < ActiveSupport::TestCase
     user.update_attribute(:admin, true)
     assert_equal true, user.reload.sudoer?
   end
+
+  test '#update_admin! sets a new updated_on date after admin changed' do
+    user = User.generate(:admin => true)
+    user.update_attribute(:updated_on, nil)
+    assert_equal nil, user.reload.updated_on
+    user.update_admin!(false)
+    assert_not_nil user.reload.updated_on
+  end
 end
