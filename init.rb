@@ -17,6 +17,6 @@ Redmine::Plugin.register :redmine_sudo do
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   url 'http://github.com/jbbarth/redmine_sudo'
   version '0.0.1'
-  requires_redmine :version_or_higher => '1.2.0'
+  requires_redmine :version_or_higher => '2.1.0'
   #settings :default => { }, :partial => 'settings/sudo_settings'
 end
