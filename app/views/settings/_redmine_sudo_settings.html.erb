@@ -8,3 +8,9 @@
   <%= text_field_tag 'settings[become_user]', @settings['become_user'] %>
 </p>
 </fieldset>
+<fieldset>
+<p>
+  <label>CSS Admin</label> 
+  <%= text_area_tag 'settings[additional_css]', @settings['additional_css'], :size => '50x5' %>
+</p>
+</fieldset>

@@ -21,5 +21,6 @@ Redmine::Plugin.register :redmine_sudo do
   settings :default => {
     'become_admin' => '[sudo -v]',
     'become_user' => '[sudo -k]',
+    'additional_css' => '#top-menu { background-color:red; }',
   }, :partial => 'settings/redmine_sudo_settings'
 end

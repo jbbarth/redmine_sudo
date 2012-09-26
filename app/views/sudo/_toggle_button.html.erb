@@ -9,3 +9,9 @@
   })
 </script>
 <% end %>
+
+<% if User.current.admin? && Setting.plugin_redmine_sudo["additional_css"].present? %>
+<style>
+  <%= Setting.plugin_redmine_sudo["additional_css"].html_safe %>
+</style>
+<% end %>
