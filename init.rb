@@ -1,11 +1,8 @@
 require 'redmine'
 require 'redmine_sudo/hooks'
 
-# Rails 3 compat
-reloader = Redmine::VERSION::MAJOR <= 1 ? config : ActionDispatch::Callbacks
-
 # Patches to existing classes/modules
-reloader.to_prepare do
+ActionDispatch::Callbacks.to_prepare do
   require_dependency 'redmine_sudo/user_patch'
 end
 

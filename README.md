@@ -4,7 +4,7 @@ This plugin allows administrators of a redmine instance to change their rights t
 
 ## Compatibility
 
-This plugin should work with any 1.x and 2.x version. If you have any issue, don't forget to mention the Redmine version you're using.
+This plugin only works with Redmine > 2.1.0. If you have any issue, don't forget to mention the Redmine version you're using.
 
 ## Installation
 
@@ -12,6 +12,6 @@ See: http://www.redmine.org/projects/redmine/wiki/Plugins
 
 Basically you just have to:
 
-* drop the plugin in the "vendor/plugins/" directory (Redmine 1.x) or "plugins/" directory (Redmine 2.x)
-* run `rake db:migrate:all` (Redmine 1.x) or `rake redmine:plugins:migrate` (Redmine 2.x)
+* drop the plugin in the "plugins/" directory
+* run `rake redmine:plugins:migrate`
 * restart your redmine instance
