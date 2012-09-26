@@ -18,5 +18,8 @@ Redmine::Plugin.register :redmine_sudo do
   url 'http://github.com/jbbarth/redmine_sudo'
   version '0.0.1'
   requires_redmine :version_or_higher => '2.1.0'
-  #settings :default => { }, :partial => 'settings/sudo_settings'
+  settings :default => {
+    'become_admin' => '[sudo -v]',
+    'become_user' => '[sudo -k]',
+  }, :partial => 'settings/redmine_sudo_settings'
 end

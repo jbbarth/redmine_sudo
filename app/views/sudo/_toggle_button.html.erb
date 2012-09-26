@@ -2,10 +2,10 @@
 <style>
   .sudo { margin:0 5px; font-weight:normal !important; }
 </style>
-<% label = User.current.admin? ? 'sudo -k' : 'sudo -v' %>
+<% label = User.current.admin? ? Setting.plugin_redmine_sudo["become_user"] : Setting.plugin_redmine_sudo["become_admin"] %>
 <script>
   $(function() {
-    $('<span><a class="sudo" href="/sudo/toggle">[<%=label%>]</a></span>').appendTo('#loggedas')
+    $('<span><a class="sudo" href="/sudo/toggle"><%=label%></a></span>').appendTo('#loggedas')
   })
 </script>
 <% end %>

@@ -1,0 +1,10 @@
+<fieldset>
+<p>
+  <label>User->Admin</label> 
+  <%= text_field_tag 'settings[become_admin]', @settings['become_admin'] %>
+</p>
+<p>
+  <label>Admin->User</label> 
+  <%= text_field_tag 'settings[become_user]', @settings['become_user'] %>
+</p>
+</fieldset>
