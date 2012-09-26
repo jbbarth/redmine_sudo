@@ -1,0 +1,7 @@
+<style>
+  #sudo { float:right; height:20px; line-height:20px; }
+  .sudo { margin:0 2px 0 2px !important; font-weight:normal !important; }
+<% if User.current.admin? && Setting.plugin_redmine_sudo["additional_css"].present? %>
+  <%= Setting.plugin_redmine_sudo["additional_css"].html_safe %>
+<% end %>
+</style>
