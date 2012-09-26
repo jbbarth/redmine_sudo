@@ -1,6 +1,6 @@
 <% if User.current.sudoer? %>
 <style>
-  .sudo { margin:0 5px; font-weight:normal !important; }
+  .sudo { margin:0 2px 0 13px !important; font-weight:normal !important; }
 </style>
 <% label = User.current.admin? ? Setting.plugin_redmine_sudo["become_user"] : Setting.plugin_redmine_sudo["become_admin"] %>
 <script>
