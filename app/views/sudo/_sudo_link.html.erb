@@ -1,8 +1,12 @@
 <% if User.current.sudoer? %>
   <div id="sudo">
-    <a class="sudo" href="/sudo/toggle">
-      <% label = User.current.admin? ? "become_user" : "become_admin" %>
-      <%= Setting.plugin_redmine_sudo[label] %>
-    </a>
+    <ul>
+      <li>
+        <a class="sudo" href="/sudo/toggle">
+          <% label = User.current.admin? ? "become_user" : "become_admin" %>
+          <%= Setting.plugin_redmine_sudo[label] %>
+        </a>
+      </li>
+    </ul>
   </div>
 <% end %>
