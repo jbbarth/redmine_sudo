@@ -13,6 +13,12 @@ ActionDispatch::Callbacks.to_prepare do
   require_dependency 'redmine_sudo/user_patch'
 end
 
+# Ensure we don't run on a broken version of libxml with deface < 1.0
+# TODO: remove it when we upgrade deface with this patch merged: https://github.com/spree/deface/commit/415422f73e43d757f2d524a8b2b8960ca09f621c
+if Nokogiri.uses_libxml? && Nokogiri::LIBXML_VERSION.match(/^2.9/)
+  raise "You cannot use libxml2 v2.9 with deface for now, see https://github.com/spree/deface/commit/415422f73e43d757f2d524a8b2b8960ca09f621c"
+end
+
 # Plugin generic informations
 Redmine::Plugin.register :redmine_sudo do
   name 'Redmine Sudo plugin'
