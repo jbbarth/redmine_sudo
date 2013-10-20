@@ -13,9 +13,11 @@ class SudoTest < ActionController::IntegrationTest
 
     should "toggle sudo rights" do
       user = User.find_by_login("admin")
+      user.update_attribute(:sudoer, true)
       log_user("admin", "admin")
 
       assert user.reload.admin?
+      assert user.reload.sudoer?
 
       get "sudo/toggle?back_url=/my/page"
       assert_redirected_to "/my/page"
