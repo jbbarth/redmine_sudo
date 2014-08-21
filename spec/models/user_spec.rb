@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require "spec_helper"
 
 # redmine 2.x doesn't use object_daddy anymore
 unless User.respond_to?(:generate)
@@ -17,36 +17,36 @@ unless User.respond_to?(:generate)
   end
 end
 
-class UserTest < ActiveSupport::TestCase
-  test 'user gets correct sudoer at creation' do
+describe "User" do
+  it "should user gets correct sudoer at creation" do
     user = User.generate(:admin => true)
-    assert_equal true, user.sudoer?
+    user.sudoer?.should == true
     user = User.generate(:admin => false)
-    assert_equal false, user.sudoer?
+    user.sudoer?.should == false
   end
 
-  test 'user keeps sudoer on update if he should' do
+  it "should user keeps sudoer on update if he should" do
     user = User.generate(:admin => true)
     user.update_admin!(false)
-    assert_equal true, user.reload.sudoer?
+    user.reload.sudoer?.should == true
     #doesn't change #admin, so #sudoer doesn't change
     user.update_attribute(:firstname, "John")
-    assert_equal true, user.reload.sudoer?
+    user.reload.sudoer?.should == true
   end
 
-  test 'user gets correct sudoer when updating admin boolean' do
+  it "should user gets correct sudoer when updating admin boolean" do
     user = User.generate(:admin => true)
     #updates #admin, so #sudoer should be updated accordingly
     user.update_attribute(:admin, false)
-    assert_equal false, user.reload.sudoer?
+    user.reload.sudoer?.should == false
     user.update_attribute(:admin, true)
-    assert_equal true, user.reload.sudoer?
+    user.reload.sudoer?.should == true
   end
 
-  test '#update_admin! sets a new updated_on date after admin changed' do
+  it "should #update_admin! sets a new updated_on date after admin changed" do
     user = User.generate(:admin => true)
     user.update_attribute(:updated_on, nil)
-    assert_equal nil, user.reload.updated_on
+    user.reload.updated_on.should == nil
     user.update_admin!(false)
     assert_not_nil user.reload.updated_on
   end
