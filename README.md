@@ -25,7 +25,11 @@ Installation
 
 See: http://www.redmine.org/projects/redmine/wiki/Plugins
 
-Basically you just have to:
+**plugin requirement:**
+* this plugin requires the plugin [redmine_base_deface](https://github.com/jbbarth/redmine_base_deface) to be installed!
+* make sure you got it installed or install it before installing `redmine_sudo` plugin
+
+Then you basically just have to:
 
 * drop the plugin in the "plugins/" directory
 * run `rake redmine:plugins:migrate`
