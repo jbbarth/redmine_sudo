@@ -20,34 +20,34 @@ end
 describe "User" do
   it "should user gets correct sudoer at creation" do
     user = User.generate(:admin => true)
-    user.sudoer?.should == true
+    expect(user.sudoer?).to eq true
     user = User.generate(:admin => false)
-    user.sudoer?.should == false
+    expect(user.sudoer?).to eq false
   end
 
   it "should user keeps sudoer on update if he should" do
     user = User.generate(:admin => true)
     user.update_admin!(false)
-    user.reload.sudoer?.should == true
+    expect(user.reload.sudoer?).to eq true
     #doesn't change #admin, so #sudoer doesn't change
     user.update_attribute(:firstname, "John")
-    user.reload.sudoer?.should == true
+    expect(user.reload.sudoer?).to eq true
   end
 
   it "should user gets correct sudoer when updating admin boolean" do
     user = User.generate(:admin => true)
     #updates #admin, so #sudoer should be updated accordingly
     user.update_attribute(:admin, false)
-    user.reload.sudoer?.should == false
+    expect(user.reload.sudoer?).to eq false
     user.update_attribute(:admin, true)
-    user.reload.sudoer?.should == true
+    expect(user.reload.sudoer?).to eq true
   end
 
   it "should #update_admin! sets a new updated_on date after admin changed" do
     user = User.generate(:admin => true)
     user.update_attribute(:updated_on, nil)
-    user.reload.updated_on.should == nil
+    expect(user.reload.updated_on).to eq nil
     user.update_admin!(false)
-    assert_not_nil user.reload.updated_on
+    refute_nil user.reload.updated_on
   end
 end
