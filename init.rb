@@ -20,6 +20,11 @@ Redmine::Plugin.register :redmine_sudo do
   settings :default => {
     'become_admin' => '[sudo -v]',
     'become_user' => '[sudo -k]',
-    'additional_css' => "#top-menu { background-color:#BA0C03; }\n#header { background-color:#dd0037; }\n#main-menu li a { background-color:#BA0C03; }\n#main-menu li a:hover { background-color:#8D0A02; }",
-  }, :partial => 'settings/redmine_sudo_settings'
+    'additional_css' => "#top-menu { background-color:#BA0C04; }\n
+                        #header { background-color:#dd0037; }\n
+                        #main-menu li a { background-color:#BA0C04; }\n
+                        #main-menu li a.new-object { background-color:#BA0C04; }\n
+                        #main-menu li a:hover { background-color:#8D0A02; }\n
+                        @media all and (max-width: 899px) { #header{ background-color: #dd0037 !important; }" },
+           :partial => 'settings/redmine_sudo_settings'
 end
