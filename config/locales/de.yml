@@ -1,0 +1,4 @@
+de:
+  become_admin_label: 'Benutzer->Administrator'
+  become_user_label: 'Administrator->Benutzer'
+  css_admin_label: CSS-Regeln Administrator

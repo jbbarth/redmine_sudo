@@ -1,16 +1,16 @@
 <fieldset>
 <p>
-  <label>User->Admin</label> 
+  <label><%= l(:become_admin_label) %></label>
   <%= text_field_tag 'settings[become_admin]', @settings['become_admin'] %>
 </p>
 <p>
-  <label>Admin->User</label> 
+  <label><%= l(:become_user_label) %></label>
   <%= text_field_tag 'settings[become_user]', @settings['become_user'] %>
 </p>
 </fieldset>
 <fieldset>
 <p>
-  <label>CSS Admin</label> 
+  <label><%= l(:css_admin_label) %></label>
   <%= text_area_tag 'settings[additional_css]', @settings['additional_css'], :size => '50x5' %>
 </p>
 </fieldset>

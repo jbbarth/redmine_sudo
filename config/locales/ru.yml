@@ -1,0 +1,4 @@
+ru:
+  become_admin_label: 'Пользователь->Администратор'
+  become_user_label: 'Администратор->Пользователь'
+  css_admin_label: CSS Администратор

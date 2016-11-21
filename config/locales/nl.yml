@@ -1,0 +1,4 @@
+nl:
+  become_admin_label: 'Gebruiker->Beheerder'
+  become_user_label: 'Beheerder->Gebruiker'
+  css_admin_label: CSS-regels voor beheerder
