@@ -1,9 +1,6 @@
 class AddSudoerToUsers < ActiveRecord::Migration
   def self.up
     add_column :users, :sudoer, :boolean, :default => false, :null => false
-    User.all.each do |user|
-      user.update_attribute(:sudoer, true) if user.admin?
-    end
   end
 
   def self.down
