@@ -14,12 +14,12 @@ Redmine::Plugin.register :redmine_sudo do
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   url 'https://github.com/jbbarth/redmine_sudo'
   version '0.0.1'
-  requires_redmine :version_or_higher => '2.5.0'
-  requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.3' if Rails.env.test?
-  requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
+  # requires_redmine :version_or_higher => '2.5.0'
+  # requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.3' if Rails.env.test?
+  # requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
   settings :default => {
-    'become_admin' => '[sudo -v]',
-    'become_user' => '[sudo -k]',
+    'become_admin' => 'Стать администратором',
+    'become_user' => 'Стать пользователем',
     'additional_css' => "#top-menu { background-color:#BA0C04; }\n
                         #header { background-color:#dd0037; }\n
                         #main-menu li a { background-color:#BA0C04; }\n
