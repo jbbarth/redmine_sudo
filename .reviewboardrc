@@ -1,0 +1,4 @@
+REVIEWBOARD_URL = 'https://reviewboard.elins.internal/'
+REPOSITORY = 'vhod_change_user'
+ENABLE_PROXY = False
+TRACKING_BRANCH = 'master'
