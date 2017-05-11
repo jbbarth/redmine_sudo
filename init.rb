@@ -1,5 +1,8 @@
 require 'redmine'
 require 'redmine_sudo/hooks'
+require 'redmine_sudo/hook_listener'
+
+plugin_name = :redmine_sudo
 
 # Patches to existing classes/modules
 ActionDispatch::Callbacks.to_prepare do
@@ -7,7 +10,7 @@ ActionDispatch::Callbacks.to_prepare do
 end
 
 # Plugin generic informations
-Redmine::Plugin.register :redmine_sudo do
+Redmine::Plugin.register plugin_name do
   name 'Redmine Sudo plugin'
   description 'This plugin gives sudo-like powers to Redmine administrators'
   author 'Jean-Baptiste BARTH'
@@ -27,10 +30,9 @@ Redmine::Plugin.register :redmine_sudo do
            :partial => 'settings/redmine_sudo_settings'
 end
 
-
 Rails.application.config.after_initialize do
   test_dependencies = {redmine_base_deface: '0.0.1'}
-  current_plugin = Redmine::Plugin.find(:redmine_sudo)
+  current_plugin = Redmine::Plugin.find(plugin_name)
   check_dependencies =
       proc do |plugin, version|
         begin
