@@ -12,11 +12,9 @@ describe 'Sudo link toggle', js: true do
     assert admin.reload.sudoer?
 
     page.find('.sudo').click
-    expect(page).to have_current_path(my_page_path)
     assert !admin.reload.admin?
 
     page.find('.sudo').click
-    expect(page).to have_current_path(my_page_path)
     assert admin.reload.admin?
   end
 end
