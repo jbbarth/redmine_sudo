@@ -1,4 +1,4 @@
-require "spec_helper"
+require File.expand_path('../../rails_helper', __FILE__)
 
 # redmine 2.x doesn't use object_daddy anymore
 unless User.respond_to?(:generate)
@@ -10,6 +10,7 @@ unless User.respond_to?(:generate)
     user.mail = "#{@generated_user_login}@example.com" if user.mail.blank?
     user.firstname = "Bob" if user.firstname.blank?
     user.lastname = "Doe" if user.lastname.blank?
+    user.department = Department.first
     yield user if block_given?
     user.admin = true if attributes[:admin]
     user.save!
