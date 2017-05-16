@@ -2,7 +2,7 @@
   <div id="sudo">
     <ul>
       <li>
-        <%= link_to sudo_toggle_path(:back_url => url_for(params)), :class => "sudo" do %>
+        <%= link_to sudo_toggle_path, :class => "sudo" do %>
           <% label = User.current.admin? ? "become_user" : "become_admin" %>
           <%= Setting.plugin_redmine_sudo[label] %>
         <% end %>
