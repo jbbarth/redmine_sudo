@@ -3,7 +3,7 @@ class SudoController < ApplicationController
     require_login #should render a 403 if no user found
     if User.current.sudoer?
       User.current.update_admin!( !User.current.admin? )
-      redirect_back_or_default :controller => "my", :action => "page"
+      redirect_to :back
     else
       render_403
     end
