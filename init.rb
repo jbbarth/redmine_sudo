@@ -2,7 +2,7 @@ require 'redmine'
 require 'redmine_sudo/hooks'
 
 # Patches to existing classes/modules
-ActionDispatch::Callbacks.to_prepare do
+ActiveSupport::Reloader.to_prepare do
   require_dependency 'redmine_sudo/user_patch'
 end
 
