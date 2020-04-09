@@ -64,7 +64,7 @@ bundle exec rails redmine:plugins RAILS_ENV=test
 # bundle exec rails redmine:load_default_data REDMINE_LANG=en
 
 # take in account plugins fixtures
-cp -i plugins/*/spec/fixtures/*yml test/fixtures/
+# cp -i plugins/*/spec/fixtures/*yml test/fixtures/
 
 # bundle exec rails db:structure:dump
 bundle exec rails db:fixtures:load
