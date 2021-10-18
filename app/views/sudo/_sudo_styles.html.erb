@@ -4,4 +4,5 @@
 <% if User.current.admin? && Setting.plugin_redmine_sudo["additional_css"].present? %>
   <%= Setting.plugin_redmine_sudo["additional_css"].html_safe %>
 <% end %>
+  body.controller-users table.list td.tick.sudoer { opacity:0.4; }
 </style>
