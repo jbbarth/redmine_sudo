@@ -9,4 +9,27 @@
       </li>
     </ul>
   </div>
+  <script type="text/javascript">
+    /* function for dom detaching and appending sudo link on mobile / desktop view */
+    function detachingAppendingSudoLink(){  
+      var span;
+      if(!$('.js-profile-sudo').length){
+        span = $("<span class='js-profile-sudo'>");      
+        $(".js-flyout-menu").append(span);
+      }
+
+      if(isMobile()) { 
+        $('#sudo > ul').detach().appendTo('.js-profile-sudo');
+      } else {
+        $('.js-profile-sudo > ul').detach().appendTo('#sudo');
+      }
+    }
+    $(function(){
+      detachingAppendingSudoLink();
+    })
+    /* bind resize handler */
+    $(window).resize(function() {
+      detachingAppendingSudoLink();
+    });
+  </script>
 <% end %>
