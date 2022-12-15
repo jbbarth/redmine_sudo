@@ -17,6 +17,11 @@ Redmine::Plugin.register :redmine_sudo do
   requires_redmine :version_or_higher => '2.5.0'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.3' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
+
+  Redmine::MenuManager.map :account_menu do |menu|
+    menu.push :sudo, :sudo_toggle_path, :html => {:method => 'get', id:"sudo_id" }, :caption => :become_admin_label, before: :my_account, :class => "sudo"
+  end
+
   settings :default => {
     'become_admin' => '[sudo -v]',
     'become_user' => '[sudo -k]',
