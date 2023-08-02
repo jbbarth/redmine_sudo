@@ -1,8 +1,6 @@
 <style>
   #sudo { float:right; }
   #sudo ul { padding:0; }
-  /*  Since there is .flyout-menu ul li:first-child a {border-top: none;} and this item is unique in its menu, so we must add border to it again*/
-  .sudo {border-top: 1px solid rgba(255,255,255,.1) !important;}
 <% if User.current.admin? && Setting.plugin_redmine_sudo["additional_css"].present? %>
   <%= Setting.plugin_redmine_sudo["additional_css"].html_safe %>
 <% end %>
