@@ -19,7 +19,14 @@ Redmine::Plugin.register :redmine_sudo do
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
 
   Redmine::MenuManager.map :account_menu do |menu|
-    menu.push :sudo, :sudo_toggle_path, :html => {:method => 'get', id:"sudo_id" }, :caption => :become_admin_label, before: :my_account, :class => "sudo"
+    menu.push :sudo, :sudo_toggle_path,
+                     :html => {:method => 'get', id:"sudo_id" },
+                     :caption =>  Proc.new { 
+                        User.current.admin? ? Setting.plugin_redmine_sudo["become_user"] : Setting.plugin_redmine_sudo["become_admin"] 
+                      },
+                      before: :my_account, :class => "sudo",
+                     :if => Proc.new { User.current.sudoer? }
+    
   end
 
   settings :default => {

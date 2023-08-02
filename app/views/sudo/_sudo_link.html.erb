@@ -1,9 +1,0 @@
- <script type="text/javascript"> 
-  <% if User.current.sudoer? %>
-    <% label = User.current.admin? ? "become_user" : "become_admin" %>
-    let lable_sudo = "<%= Setting.plugin_redmine_sudo[label] %>"
-    $( ".sudo" ).text(lable_sudo);
-  <% else %>
-    $( ".sudo" ).remove();
-  <% end %>
-</script>
