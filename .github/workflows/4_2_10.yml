@@ -58,6 +58,10 @@ jobs:
 
       - name: Set up chromedriver
         uses: nanasess/setup-chromedriver@master
+        with:
+          # TODO: Unpin when nanasess/setup-chromedriver#199 is fixed:
+          #       https://github.com/nanasess/setup-chromedriver/issues/199
+          chromedriver-version: '115.0.5790.102'
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
