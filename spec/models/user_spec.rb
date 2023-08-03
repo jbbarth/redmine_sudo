@@ -29,14 +29,14 @@ describe "User" do
     user = User.generate(:admin => true)
     user.update_admin!(false)
     expect(user.reload.sudoer?).to eq true
-    #doesn't change #admin, so #sudoer doesn't change
+    # doesn't change #admin, so #sudoer doesn't change
     user.update_attribute(:firstname, "John")
     expect(user.reload.sudoer?).to eq true
   end
 
   it "should user gets correct sudoer when updating admin boolean" do
     user = User.generate(:admin => true)
-    #updates #admin, so #sudoer should be updated accordingly
+    # updates #admin, so #sudoer should be updated accordingly
     user.update_attribute(:admin, false)
     expect(user.reload.sudoer?).to eq false
     user.update_attribute(:admin, true)

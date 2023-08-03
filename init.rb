@@ -1,10 +1,7 @@
 require 'redmine'
-require 'redmine_sudo/hooks'
+require_relative 'lib/redmine_sudo/hooks'
 
-# Patches to existing classes/modules
-ActiveSupport::Reloader.to_prepare do
-  require_dependency 'redmine_sudo/user_patch'
-end
+Rails.autoloaders.main.ignore("#{__dir__}/lib")
 
 # Plugin generic informations
 Redmine::Plugin.register :redmine_sudo do
@@ -13,20 +10,22 @@ Redmine::Plugin.register :redmine_sudo do
   author 'Jean-Baptiste BARTH'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   url 'https://github.com/jbbarth/redmine_sudo'
-  version '0.0.1'
+  version '5.0.0'
   requires_redmine :version_or_higher => '2.5.0'
   requires_redmine_plugin :redmine_base_rspec, :version_or_higher => '0.0.3' if Rails.env.test?
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'
 
   Redmine::MenuManager.map :account_menu do |menu|
     menu.push :sudo, :sudo_toggle_path,
-                     :html => {:method => 'get', id:"sudo_id" },
-                     :caption =>  Proc.new { 
-                        User.current.admin? ? Setting.plugin_redmine_sudo["become_user"] : Setting.plugin_redmine_sudo["become_admin"] 
-                      },
-                      before: :my_account, :class => "sudo",
-                     :if => Proc.new { User.current.sudoer? }
-    
+              html: { method: 'get',
+                      id: "sudo_id" },
+              caption: Proc.new {
+                User.current.admin? ? Setting.plugin_redmine_sudo["become_user"] : Setting.plugin_redmine_sudo["become_admin"]
+              },
+              before: :my_account,
+              class: "sudo",
+              if: Proc.new { User.current.sudoer? }
+
   end
 
   settings :default => {

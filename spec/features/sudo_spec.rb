@@ -4,14 +4,14 @@ describe "Sudo", type: :request do
 
   fixtures :users, :roles
 
-  #taken from core
+  # taken from core
   def log_user(login, password)
     User.anonymous
     get "/login"
     assert_equal nil, session[:user_id]
     assert_response :success
     assert_template "account/login"
-    post "/login", params: {:username => login, :password => password}
+    post "/login", params: { :username => login, :password => password }
     assert_equal login, User.find(session[:user_id]).login
   end
 

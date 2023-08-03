@@ -1,6 +1,5 @@
 <style>
-  #sudo { float:right; }
-  #sudo ul { padding:0; }
+  #top-menu #sudo_id { margin: 0 8px 0 -8px; }
 <% if User.current.admin? && Setting.plugin_redmine_sudo["additional_css"].present? %>
   <%= Setting.plugin_redmine_sudo["additional_css"].html_safe %>
 <% end %>
