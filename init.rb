@@ -1,7 +1,7 @@
 require 'redmine'
 require_relative 'lib/redmine_sudo/hooks'
 
-Rails.autoloaders.main.ignore("#{__dir__}/lib")
+Rails.autoloaders.main.ignore("#{__dir__}/lib") if Rails::VERSION::MAJOR >= 6
 
 # Plugin generic informations
 Redmine::Plugin.register :redmine_sudo do
