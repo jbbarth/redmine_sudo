@@ -7,6 +7,7 @@ module RedmineSudo
   class ModelHook < Redmine::Hook::Listener
     def after_plugins_loaded(_context = {})
       require_relative 'user_patch'
+      require_relative 'users_controller_patch'
     end
   end
 end
