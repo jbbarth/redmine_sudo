@@ -1,8 +1,8 @@
-name: Tests 5.1.2
+name: Tests 6.0.3
 
 env:
   PLUGIN_NAME: redmine_sudo
-  REDMINE_VERSION: 5.1.2
+  REDMINE_VERSION: 6.0.3
   RAILS_ENV: test
 
 on:
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ['3.1']
+        ruby: ['3.3']
         db: ['postgres']
       fail-fast: false
 
@@ -89,9 +89,6 @@ jobs:
       - name: Prepare Redmine source
         working-directory: redmine
         run: |
-          # Add missing fixtures to API tests
-          sed -i='' 's/^  fixtures :users/&, :groups_users/' test/integration/api_test/users_test.rb # TODO: remove next line when fixed in Redmine core
-          sed -i='' 's/^  fixtures(/&:user_preferences,/' test/integration/api_test/issues_test.rb # TODO: remove next line when fixed in Redmine core
           # Fix routes broken by Redmine core plugins tests
           rm -f test/integration/routing/plugins_test.rb # Fix routing tests # TODO Remove this line when https://www.redmine.org/issues/38707 is fixed
           sed -i '/rubocop/d' Gemfile
