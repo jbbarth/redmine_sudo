@@ -8,6 +8,8 @@ module RedmineSudo
     def after_plugins_loaded(_context = {})
       require_relative 'user_patch'
       require_relative 'users_controller_patch'
+      require_relative 'user_query_patch'
+      require_relative 'user_queries_helper_patch'
     end
   end
 end
