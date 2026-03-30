@@ -20,3 +20,9 @@ class User < Principal
   include RedmineSudo::UserPatch
   before_save :update_sudoer
 end
+
+class AnonymousUser < User
+  def sudoer?
+    false
+  end
+end
