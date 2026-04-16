@@ -2,3 +2,15 @@ fr:
   become_admin_label: 'Utilisateur->Administrateur'
   become_user_label: 'Administrateur->Utilisateur'
   css_admin_label: Règles CSS de l'administrateur
+  sudo_oidc_lockout_warning: "⚠ Attention : votre session actuelle ne satisfait pas ces conditions. Si vous quittez cette page, vos droits d'administration seront révoqués et vous ne pourrez les récupérer qu'en vous reconnectant avec une authentification suffisante."
+  sudo_oidc_restrictions_legend: "Restrictions d'authentification OIDC"
+  sudo_require_oidc_label: "Connexion OIDC requise pour passer admin"
+  sudo_require_oidc_hint: "Si coché, seuls les utilisateurs connectés via OIDC peuvent activer leurs droits admin."
+  sudo_required_oidc_auth_level_label: "Niveau d'authentification OIDC requis"
+  sudo_required_oidc_auth_level_placeholder: "ex: cert3"
+  sudo_required_oidc_auth_level_hint: "Valeur exacte du claim auth_level (ou acr) exigée. Implique la connexion OIDC. Laisser vide pour ne pas vérifier."
+  error_sudo_requires_stronger_auth: "Droits d'administration non activés : votre session ne satisfait pas les conditions d'authentification requises."
+  sudo_oidc_auth_level_current: "Votre session actuelle : %{value}"
+  sudo_oidc_auth_level_current_absent: "Votre session actuelle : connecté via OIDC, mais aucun niveau d'authentification transmis."
+  sudo_oidc_error_message_label: "Message d'erreur personnalisé"
+  sudo_oidc_error_message_hint: "Affiché à la place du message par défaut. Laisser vide pour utiliser le message par défaut."

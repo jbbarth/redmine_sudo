@@ -36,6 +36,10 @@ Redmine::Plugin.register :redmine_sudo do
                         #main-menu li a { background-color:#BA0C04; }\n
                         #main-menu li a.new-object { background-color:#BA0C04; }\n
                         #main-menu li a:hover { background-color:#8D0A02; }\n
-                        @media all and (max-width: 899px) { #header{ background-color: #dd0037 !important; }" },
+                        @media all and (max-width: 899px) { #header{ background-color: #dd0037 !important; }",
+    'require_oidc_for_sudo' => '',
+    'required_oidc_auth_level' => '',
+    'oidc_error_message' => ''
+           },
            :partial => 'settings/redmine_sudo_settings'
 end

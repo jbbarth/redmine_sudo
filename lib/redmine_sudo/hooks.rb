@@ -10,6 +10,8 @@ module RedmineSudo
       require_relative 'users_controller_patch'
       require_relative 'user_query_patch'
       require_relative 'user_queries_helper_patch'
+      require_relative 'oidc_auth_check'
+      require_relative 'application_controller_patch'
     end
   end
 end

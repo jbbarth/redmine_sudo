@@ -2,3 +2,15 @@ en:
   become_admin_label: 'User->Admin'
   become_user_label: 'Admin->User'
   css_admin_label: CSS rules Admin
+  sudo_oidc_lockout_warning: "⚠ Warning: your current session does not satisfy these conditions. If you leave this page, your admin rights will be revoked and can only be restored by logging in with a sufficient authentication method."
+  sudo_oidc_restrictions_legend: "OIDC authentication restrictions"
+  sudo_require_oidc_label: "Require OIDC login to activate admin"
+  sudo_require_oidc_hint: "When checked, only users logged in via OIDC can activate their admin rights."
+  sudo_required_oidc_auth_level_label: "Required OIDC authentication level"
+  sudo_required_oidc_auth_level_placeholder: "e.g. cert3"
+  sudo_required_oidc_auth_level_hint: "Exact value of the auth_level (or acr) claim required. Implies OIDC login. Leave blank to skip this check."
+  error_sudo_requires_stronger_auth: "Admin rights not activated: your session does not meet the required authentication conditions."
+  sudo_oidc_auth_level_current: "Your current session: %{value}"
+  sudo_oidc_auth_level_current_absent: "Your current session: logged in via OIDC, but no authentication level claim was received."
+  sudo_oidc_error_message_label: "Custom error message"
+  sudo_oidc_error_message_hint: "Displayed instead of the default message. Leave blank to use the default."

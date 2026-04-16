@@ -14,3 +14,34 @@
   <%= text_area_tag 'settings[additional_css]', @settings['additional_css'], :size => '50x5' %>
 </p>
 </fieldset>
+<fieldset>
+  <legend><%= l(:sudo_oidc_restrictions_legend) %></legend>
+  <% if (Setting.plugin_redmine_sudo['require_oidc_for_sudo'] == '1' || Setting.plugin_redmine_sudo['required_oidc_auth_level'].to_s.strip.present?) &&
+        !(session[:logged_in_with_oidc] &&
+          (Setting.plugin_redmine_sudo['required_oidc_auth_level'].to_s.strip.blank? ||
+           session[:oidc_auth_level].to_s == Setting.plugin_redmine_sudo['required_oidc_auth_level'].to_s.strip)) %>
+    <p class="warning"><%= l(:sudo_oidc_lockout_warning) %></p>
+  <% end %>
+  <p>
+    <label><%= l(:sudo_require_oidc_label) %></label>
+    <%= check_box_tag 'settings[require_oidc_for_sudo]', '1', @settings['require_oidc_for_sudo'] == '1' %>
+    <em><%= l(:sudo_require_oidc_hint) %></em>
+  </p>
+  <p>
+    <label><%= l(:sudo_required_oidc_auth_level_label) %></label>
+    <%= text_field_tag 'settings[required_oidc_auth_level]', @settings['required_oidc_auth_level'], :size => 40,
+                       :placeholder => l(:sudo_required_oidc_auth_level_placeholder) %>
+    <em><%= l(:sudo_required_oidc_auth_level_hint) %></em>
+    <% if session[:oidc_auth_level].present? %>
+      <br><em><%= l(:sudo_oidc_auth_level_current, value: session[:oidc_auth_level]) %></em>
+    <% elsif session[:logged_in_with_oidc] %>
+      <br><em><%= l(:sudo_oidc_auth_level_current_absent) %></em>
+    <% end %>
+  </p>
+  <p>
+    <label><%= l(:sudo_oidc_error_message_label) %></label>
+    <%= text_field_tag 'settings[oidc_error_message]', @settings['oidc_error_message'], :size => 80,
+                       :placeholder => l(:error_sudo_requires_stronger_auth) %>
+    <em><%= l(:sudo_oidc_error_message_hint) %></em>
+  </p>
+</fieldset>
