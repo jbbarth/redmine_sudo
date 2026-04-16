@@ -5,6 +5,7 @@ class SudoController < ApplicationController
       if !User.current.admin? && oidc_restriction_active? && !oidc_conditions_met?
         custom_message = Setting.plugin_redmine_sudo['oidc_error_message'].to_s.strip
         flash[:error] = custom_message.presence || l(:error_sudo_requires_stronger_auth)
+        params[:back_url] = url_for(request.referer) if request.referer.present?
         redirect_back_or_default :controller => "my", :action => "page"
         return
       end
