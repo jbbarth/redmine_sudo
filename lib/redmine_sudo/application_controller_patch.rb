@@ -2,17 +2,23 @@
 
 module RedmineSudo
   module ApplicationControllerPatch
-    def self.included(base)
+    def self.prepended(base)
       base.include RedmineSudo::OidcAuthCheck
       base.before_action :enforce_oidc_sudo_restrictions
-      base.before_action :elevate_api_sudoer
+    end
+
+    # Elevate as part of user_setup, right after User.current has been set, so
+    # the elevation reliably runs before controller require_admin filter
+    def user_setup
+      super
+      elevate_api_sudoer
     end
 
     private
 
     # Treat a sudoer as admin for the duration of an API request, unless the
-    # feature has been explicitly disabled. So API access keeps working regardless of
-    # the current web sudo state.
+    # feature has been explicitly disabled, so API access keeps working
+    # regardless of the current web sudo state.
     def elevate_api_sudoer
       return unless api_request?
       return if Setting.plugin_redmine_sudo['api_sudoer_always_admin'] == '0'
@@ -40,4 +46,4 @@ module RedmineSudo
   end
 end
 
-ApplicationController.include RedmineSudo::ApplicationControllerPatch unless ApplicationController < RedmineSudo::ApplicationControllerPatch
+ApplicationController.prepend RedmineSudo::ApplicationControllerPatch unless ApplicationController < RedmineSudo::ApplicationControllerPatch
