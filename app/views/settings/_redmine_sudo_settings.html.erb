@@ -45,3 +45,12 @@
     <em><%= l(:sudo_oidc_error_message_hint) %></em>
   </p>
 </fieldset>
+<fieldset>
+  <legend><%= l(:sudo_api_legend) %></legend>
+  <p>
+    <label><%= l(:sudo_api_always_admin_label) %></label>
+    <%= hidden_field_tag 'settings[api_sudoer_always_admin]', '0' %>
+    <%= check_box_tag 'settings[api_sudoer_always_admin]', '1', @settings['api_sudoer_always_admin'] != '0' %>
+    <em><%= l(:sudo_api_always_admin_hint) %></em>
+  </p>
+</fieldset>

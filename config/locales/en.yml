@@ -14,3 +14,6 @@ en:
   sudo_oidc_auth_level_current_absent: "Your current session: logged in via OIDC, but no authentication level claim was received."
   sudo_oidc_error_message_label: "Custom error message"
   sudo_oidc_error_message_hint: "Displayed instead of the default message. Leave blank to use the default."
+  sudo_api_legend: "API requests"
+  sudo_api_always_admin_label: "Sudoers are always admin over the API"
+  sudo_api_always_admin_hint: "When checked, a sudoer's API requests are always treated as admin, even after they dropped admin rights in the web interface. This keeps API access working regardless of the current web sudo state."

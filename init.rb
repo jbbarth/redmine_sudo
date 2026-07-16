@@ -39,7 +39,8 @@ Redmine::Plugin.register :redmine_sudo do
                         @media all and (max-width: 899px) { #header{ background-color: #dd0037 !important; }",
     'require_oidc_for_sudo' => '',
     'required_oidc_auth_level' => '',
-    'oidc_error_message' => ''
+    'oidc_error_message' => '',
+    'api_sudoer_always_admin' => '1'
            },
            :partial => 'settings/redmine_sudo_settings'
 end

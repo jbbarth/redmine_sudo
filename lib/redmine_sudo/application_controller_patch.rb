@@ -5,9 +5,21 @@ module RedmineSudo
     def self.included(base)
       base.include RedmineSudo::OidcAuthCheck
       base.before_action :enforce_oidc_sudo_restrictions
+      base.before_action :elevate_api_sudoer
     end
 
     private
+
+    # Treat a sudoer as admin for the duration of an API request, unless the
+    # feature has been explicitly disabled. So API access keeps working regardless of
+    # the current web sudo state.
+    def elevate_api_sudoer
+      return unless api_request?
+      return if Setting.plugin_redmine_sudo['api_sudoer_always_admin'] == '0'
+      return unless User.current.sudoer?
+
+      User.current.api_sudo_elevated = true
+    end
 
     # If a sudoer is currently admin but their session does not satisfy the
     # configured OIDC conditions, silently revoke their admin rights.
@@ -15,6 +27,7 @@ module RedmineSudo
     # Exception: the settings page is never blocked so that a misconfiguration
     # can always be corrected without losing access.
     def enforce_oidc_sudo_restrictions
+      return if api_request?
       return unless User.current.logged?
       return unless User.current.admin?
       return unless User.current.sudoer?

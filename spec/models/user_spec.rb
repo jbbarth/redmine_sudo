@@ -50,4 +50,25 @@ describe "User" do
     user.update_admin!(false)
     refute_nil user.reload.updated_on
   end
+
+  describe "API sudo elevation" do
+    it "reports admin? as true only while elevated in memory" do
+      user = User.generate(:admin => false)
+      user.update_columns(sudoer: true)
+      expect(user.admin?).to eq false
+      user.api_sudo_elevated = true
+      expect(user.admin?).to eq true
+    end
+
+    it "never persists the elevation to the admin or sudoer columns" do
+      user = User.generate(:admin => false)
+      user.update_columns(sudoer: true)
+      user.api_sudo_elevated = true
+      user.update_attribute(:firstname, "Changed")
+      # Re-fetch a fresh instance: the in-memory flag must not have reached the DB.
+      fresh = User.find(user.id)
+      expect(fresh.admin?).to eq false
+      expect(fresh.sudoer?).to eq true
+    end
+  end
 end
