@@ -31,13 +31,28 @@ Redmine::Plugin.register :redmine_sudo do
   settings :default => {
     'become_admin' => '[sudo -v]',
     'become_user' => '[sudo -k]',
-    'additional_css' => "#top-menu { background-color:#BA0C04; }\n
-                        #header { background-color:#dd0037; }\n
-                        #main-menu li a { background-color:#BA0C04; }\n
-                        #main-menu li a.new-object { background-color:#BA0C04; }\n
-                        #main-menu li a:hover { background-color:#8D0A02; }\n
-                        #top-menu .top-menu__links a:hover { background-color:#8D0A02; }\n
-                        @media all and (max-width: 899px) { #header{ background-color: #dd0037 !important; } }",
+    # Default styles for the Redmine 7.0 default theme: the red counterpart of
+    # the blue/indigo ramp used by the core stylesheet.
+    'additional_css' => <<~CSS,
+      #top-menu { background-color: #6b1f1f; }
+
+      #header { background-color: var(--oc-red-9); }
+
+      #main-menu {
+        background-color: var(--oc-red-0);
+        --color-current-marker: var(--oc-red-8);
+      }
+      #main-menu li a:hover { background-color: var(--oc-red-1); }
+      #main-menu li a.new-object { background-color: var(--oc-red-1); border-color: var(--oc-red-7); }
+      #main-menu li a.new-object:hover { background-color: var(--oc-red-2); }
+      #main-menu .menu-children { border-color: var(--oc-red-7); }
+      #main-menu .menu-children li a:hover { background-color: var(--oc-red-9); }
+
+      @media all and (max-width: 899px) {
+        #header { background-color: var(--oc-red-8); }
+        .flyout-menu { background-color: #8f2f2f; }
+      }
+    CSS
     'require_oidc_for_sudo' => '',
     'required_oidc_auth_level' => '',
     'oidc_error_message' => '',
