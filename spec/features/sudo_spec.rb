@@ -59,6 +59,18 @@ describe "Sudo", type: :request do
     end
   end
 
+  context "additional css" do
+    it "cannot close the style element to inject markup" do
+      sudo_settings("additional_css" => "#main-menu { color: red; }</style><script>alert(1)</script>")
+      log_user("admin", "admin")
+
+      get "/my/page"
+
+      expect(response.body).to include("#main-menu { color: red; }")
+      expect(response.body).not_to include("<script>alert(1)")
+    end
+  end
+
   context "enforce_oidc_sudo_restrictions" do
 
     let(:admin_user) { User.find_by_login("admin") }
