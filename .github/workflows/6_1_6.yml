@@ -1,8 +1,8 @@
-name: Tests 6.1.0
+name: Tests 6.1.6-aoeur
 
 env:
   PLUGIN_NAME: redmine_sudo
-  REDMINE_VERSION: 6.1.2-aoeur
+  REDMINE_VERSION: 6.1.6-aoeur
   RAILS_ENV: test
 
 on:

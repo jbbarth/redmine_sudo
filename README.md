@@ -243,12 +243,12 @@ version you are using.
 
 ## Test status
 
-| Plugin branch | Redmine Version | Test Status      |
-|---------------|-----------------|------------------|
-| redmine-6.1   | 6.1.0           | [![6.1.0][1]][2] |
+| Plugin branch | Redmine Version | Test Status            |
+|---------------|-----------------|------------------------|
+| redmine-6.1   | 6.1.6-aoeur     | [![6.1.6-aoeur][1]][2] |
 
-[1]: https://github.com/tools-aoeur/redmine_sudo/actions/workflows/6_1_0.yml/badge.svg
-[2]: https://github.com/tools-aoeur/redmine_sudo/actions
+[1]: https://github.com/tools-aoeur/redmine_sudo/actions/workflows/6_1_6.yml/badge.svg?branch=redmine-6.1
+[2]: https://github.com/tools-aoeur/redmine_sudo/actions/workflows/6_1_6.yml?query=branch%3Aredmine-6.1
 
 ## Contribute
 
