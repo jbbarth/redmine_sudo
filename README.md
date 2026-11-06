@@ -51,8 +51,9 @@ def admin?
 end
 ```
 
-`@sudo_session_admin` is set by a `find_current_user` override, on the `User`
-instance built for the current request only, and only when all of the
+`@sudo_session_admin` is set by a `user_setup` override (once the user is
+resolved, whichever lookup resolved them), on the `User` instance built for
+the current request only, and only when all of the
 following hold:
 
 1. the request was authenticated by the session cookie (`session[:user_id]`
@@ -137,10 +138,14 @@ the UI enforces. Concretely, a sudoer calling the API:
 
 Two things worth knowing:
 
-- **`.json` / `.xml` URLs never see the session elevation**, even from a
-  logged-in browser: Redmine core's `find_current_user` deliberately ignores
-  the session for API-formatted requests. Redmine's own UI uses `.js` and
-  format-less endpoints, so the web interface is unaffected.
+- **`.json` / `.xml` URLs never see the session elevation** from a logged-in
+  browser, unless the controller serves the browser's session on purpose:
+  Redmine core empties the session of API-formatted requests. A controller
+  that keeps it gets the
+  elevation like any session request, provided it drops the session again as
+  soon as API credentials are supplied, since the elevation only checks that
+  the session authenticated the resolved user. Redmine's own UI uses `.js`
+  and format-less endpoints, so the web interface is unaffected.
 - Some read-only core endpoints (`/trackers.json`, `/issue_statuses.json`,
   `/enumerations.json`, ...) are gated by core's
   `require_admin_or_api_request`, which lets *any* authenticated API user
@@ -224,7 +229,8 @@ rights.
 
 ## Compatibility
 
-Requires Redmine >= 6.1.0. When reporting an issue, always mention the Redmine
+Requires Redmine >= 6.1.4 (relies on core emptying the session of API
+requests, #44249). When reporting an issue, always mention the Redmine
 version you are using.
 
 ## Differences from the original plugin

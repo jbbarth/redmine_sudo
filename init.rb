@@ -9,8 +9,8 @@ Redmine::Plugin.register :redmine_sudo do
   author 'Jean-Baptiste BARTH (orig)'
   author_url 'mailto:jeanbaptiste.barth@gmail.com'
   url 'https://github.com/tools-aoeur/redmine_sudo'
-  version '6.1.0'
-  requires_redmine version_or_higher: '6.1.0'
+  version '6.1.4'
+  requires_redmine version_or_higher: '6.1.4'
 
   Redmine::MenuManager.map :account_menu do |menu|
     menu.push :sudo, :sudo_toggle_path,

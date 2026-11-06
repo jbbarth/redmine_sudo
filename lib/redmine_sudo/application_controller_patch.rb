@@ -23,14 +23,17 @@ module RedmineSudo
       before_action :enforce_sudo_grace_timeout
     end
 
-    # Marks the request's own User instance as elevated. Only an interactive
-    # session login reaches this: `session[:user_id]` is set by the login form
-    # alone, and core's `find_current_user` ignores the session entirely for
-    # `.json`/`.xml` API requests.
-    def find_current_user
-      user = super
-      user.sudo_session_admin = true if user && sudo_admin_elevated?(user)
-      user
+    # Marks the request's own User instance as elevated, once the user is resolved.
+    #
+    # This deliberately hooks `user_setup` and not `find_current_user`: how the
+    # user got resolved is the business of whichever controller's lookup ran
+    # (a controller may well resolve the session of a JSON request itself), but
+    # the elevation only depends on what the session says about the resolved
+    # user. Only an interactive session login sets `session[:user_id]`.
+    def user_setup
+      super
+      user = User.current
+      user.sudo_session_admin = true if user.logged? && sudo_admin_elevated?(user)
     end
 
     # Slides Redmine core's SudoMode session on any `require_admin`-gated
@@ -60,13 +63,13 @@ module RedmineSudo
 
     # True when this request may act on the elevation stored in this session.
     #
-    # The first two checks together mirror exactly the branch of core's
-    # `find_current_user` that authenticates from the session, so an API key,
-    # atom key or OAuth token can never inherit an elevation even when the
-    # client also happens to send the session cookie (a browser calling
-    # `/users.json?key=...` does).
+    # The session must be the one that authenticated the user. Core empties
+    # the session of an API request, so an API key, atom key or OAuth token
+    # can never inherit an elevation even when the client also happens to send
+    # the session cookie (a browser calling `/users.json?key=...` does). A
+    # controller that keeps the session on API requests has to drop it when
+    # API credentials are supplied.
     def sudo_admin_elevated?(user)
-      return false if api_request?
       return false unless session[:user_id] == user.id
       return false unless session[SUDO_ADMIN_SESSION_KEY] == user.id
       # redmine_pretend impersonation: the impersonated user must never
@@ -104,9 +107,9 @@ module RedmineSudo
     # (via `require_admin` above, core's own `require_sudo_mode`, or our own
     # Become Admin) do that.
     #
-    # `find_current_user` has already refused to elevate by the time this
-    # runs, so all that is left here is clearing the stale session key and
-    # recording the expiry.
+    # `user_setup` has already refused to elevate by the time this runs, so
+    # all that is left here is clearing the stale session key and recording
+    # the expiry.
     def enforce_sudo_grace_timeout
       return unless sudo_admin_session_active?
       return unless Redmine::SudoMode.enabled?
